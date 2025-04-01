@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search & Dark Mode</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: black;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full screen height */
+        }
+        .dark-mode {
+            background-color: black;
+            color: white;
+        }
+        .search-box {
+            width: 50%;
+            max-width: 700px;
+            min-width: 300px;
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .dark-mode-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px 15px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+            font-size: 14px;
+        }
+        @media (min-width: 768px) {
+            .search-box input[type="text"] {
+                font-size: 20px; /* Bigger font size for desktop */
+                padding: 20px; /* Larger padding for better appearance */
+            }
+        }
+        @media (max-width: 600px) {
+            .search-box {
+                width: 80%; /* Shrinks search box for smaller screens */
+            }
+            input[type="text"] {
+                font-size: 14px; /* Adjust font size for better fit */
+            }
+            .dark-mode-button {
+                padding: 8px 12px; /* Reduces button size on small devices */
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="dark-mode-button" onclick="toggleDarkMode()">Dark Mode</button>
+    <div class="search-box">
+        <input type="text" id="search" placeholder="Do you have any questions?">
+    </div>
+    <script>
+        function toggleDarkMode() {
+            const body = document.body;
+            const button = document.querySelector('.dark-mode-button');
+
+            body.classList.toggle('dark-mode');
+            // Change button text and color dynamically
+            if (body.classList.contains('dark-mode')) {
+                button.textContent = 'Light Mode';
+                button.style.backgroundColor = '#fff';
+                button.style.color = '#000';
+            } else {
+                button.textContent = 'Dark Mode';
+                button.style.backgroundColor = '#333';
+                button.style.color = '#fff';
+            }
+        }
+    </script>
+</body>
+</html>
