@@ -1,91 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trans FAQ Search</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: white;
-            color: black;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; /* Full screen height */
-        }
-        .dark-mode {
-            background-color: black;
-            color: white;
-        }
-        .search-box {
-            width: 50%;
-            max-width: 700px;
-            min-width: 300px;
-            text-align: center;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 15px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
-        .dark-mode-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            padding: 10px 15px;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            background-color: #333;
-            color: #fff;
-            font-size: 14px;
-        }
-        @media (min-width: 768px) {
-            .search-box input[type="text"] {
-                font-size: 20px; /* Bigger font size for desktop */
-                padding: 20px; /* Larger padding for better appearance */
-            }
-        }
-        @media (max-width: 600px) {
-            .search-box {
-                width: 80%; /* Shrinks search box for smaller screens */
-            }
-            input[type="text"] {
-                font-size: 14px; /* Adjust font size for better fit */
-            }
-            .dark-mode-button {
-                padding: 8px 12px; /* Reduces button size on small devices */
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Trans FAQ Search</title>
+  <style>
+    :root {
+      --bg-light: #ffffff;
+      --bg-dark: #121212;
+      --text-light: #000000;
+      --text-dark: #ffffff;
+      --glow-color: rgba(98, 0, 238, 0.8);
+      --transition-speed: 0.3s;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      transition: background-color var(--transition-speed), color var(--transition-speed);
+    }
+
+    .dark-mode {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    .search-box {
+      position: relative;
+      width: 90%;
+      max-width: 600px;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: inherit;
+      text-align: center;
+      z-index: 1;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 15px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      background-color: inherit;
+      color: inherit;
+      transition: background-color var(--transition-speed), color var(--transition-speed);
+    }
+
+    input[type="text"]::placeholder {
+      color: #888;
+    }
+
+    .dark-mode-button {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      padding: 10px 16px;
+      background-color: #6200ee;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color var(--transition-speed);
+      z-index: 2;
+    }
+
+    .dark-mode .dark-mode-button {
+      background-color: #bb86fc;
+      color: black;
+    }
+
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--glow-color);
+      box-shadow: 0 0 6px var(--glow-color);
+      opacity: 1;
+      animation: float-out 3s infinite ease-in-out;
+    }
+
+    /* Custom positions around the box */
+    .particle:nth-child(1) {
+      top: 50%;
+      left: 0%;
+      animation-delay: 0s;
+      --x: -60px; --y: -20px;
+    }
+
+    .particle:nth-child(2) {
+      top: 0%;
+      left: 50%;
+      animation-delay: 0.6s;
+      --x: 0px; --y: -60px;
+    }
+
+    .particle:nth-child(3) {
+      top: 50%;
+      right: 0%;
+      animation-delay: 1.2s;
+      --x: 60px; --y: 20px;
+    }
+
+    .particle:nth-child(4) {
+      bottom: 0%;
+      left: 50%;
+      animation-delay: 1.8s;
+      --x: 0px; --y: 60px;
+    }
+
+    .particle:nth-child(5) {
+      top: 10%;
+      left: 10%;
+      animation-delay: 2.4s;
+      --x: -50px; --y: -50px;
+    }
+
+    @keyframes float-out {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--x), var(--y)) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      input[type="text"] {
+        font-size: 14px;
+        padding: 12px;
+      }
+
+      .dark-mode-button {
+        padding: 8px 12px;
+        font-size: 14px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <button class="dark-mode-button" onclick="toggleDarkMode()">Dark Mode</button>
-    <div class="search-box">
-        <input type="text" id="search" placeholder="Do you have any questions?">
-    </div>
-    <script>
-        function toggleDarkMode() {
-            const body = document.body;
-            const button = document.querySelector('.dark-mode-button');
+  <button class="dark-mode-button" onclick="toggleDarkMode()">Dark Mode</button>
 
-            body.classList.toggle('dark-mode');
-            // Change button text and color dynamically
-            if (body.classList.contains('dark-mode')) {
-                button.textContent = 'Light Mode';
-                button.style.backgroundColor = '#fff';
-                button.style.color = '#000';
-            } else {
-                button.textContent = 'Dark Mode';
-                button.style.backgroundColor = '#333';
-                button.style.color = '#fff';
-            }
-        }
-    </script>
+  <div class="search-box">
+    <input type="text" id="search" placeholder="Do you have any questions?" aria-label="Search FAQs">
+    <div class="particles">
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+    </div>
+  </div>
+
+  <script>
+    function toggleDarkMode() {
+      const body = document.body;
+      const button = document.querySelector('.dark-mode-button');
+      body.classList.toggle('dark-mode');
+      button.textContent = body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
+    }
+  </script>
 </body>
 </html>
